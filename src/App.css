@@ -62,7 +62,12 @@
 
 }
 
-.btnDel {
+.btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnDel,.btnUpd {
   height: 20px;
  margin-right: 10px;
 }

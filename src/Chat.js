@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
-const Chat = ({askAPI}) => {
+const Chat = ({askAPI, isUpdate}) => {
 
     let [name, setName] = useState("");
     let [message, setMessage] = useState("");
+  
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -29,6 +30,7 @@ const Chat = ({askAPI}) => {
             setName("");
             setMessage("");
     }
+    console.log(isUpdate);
 
     return (
         <div>
@@ -46,7 +48,7 @@ const Chat = ({askAPI}) => {
   
 
             <button onClick={submitForm}>
-                Post
+               {isUpdate ? "Update":"Post"}
             </button>
             </form>
         </div>
