@@ -1,6 +1,6 @@
 import React from "react";
 
-const Message = ({msg, askAPI, isUpdate}) => {
+const Message = ({msg, askAPI, setUpdate, setName, setMessage }) => {
 
   const deleteMsg = () => {
     const requestOptions = {
@@ -14,14 +14,17 @@ const Message = ({msg, askAPI, isUpdate}) => {
  
   fetch(`https://gtabala-chat-server.glitch.me/messages/${msg.id}`, requestOptions)
       .then(x => x.json())
-      .then(x => console.log(x));
-      setTimeout(() => {
+      .then(x => {console.log(x);
         askAPI();
-      }, 1000);
+      });
+     
   };
 
   const updateMsg = () => {
-    isUpdate(true);
+    setUpdate(msg.id+1);
+    setName(msg.from);
+    setMessage(msg.text);
+
   };
 
 
