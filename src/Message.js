@@ -1,6 +1,8 @@
 import React from "react";
 
+
 const Message = ({msg, askAPI, setUpdate, setName, setMessage }) => {
+
 
   const deleteMsg = () => {
     const requestOptions = {
@@ -10,6 +12,7 @@ const Message = ({msg, askAPI, setUpdate, setName, setMessage }) => {
       },
       
   };
+
 
  
   fetch(`https://gtabala-chat-server.glitch.me/messages/${msg.id}`, requestOptions)
@@ -25,6 +28,7 @@ const Message = ({msg, askAPI, setUpdate, setName, setMessage }) => {
     setName(msg.from);
     setMessage(msg.text);
 
+
   };
 
 
@@ -35,10 +39,12 @@ const Message = ({msg, askAPI, setUpdate, setName, setMessage }) => {
         </p>
 <div className="text-container">
 <p className="text">{msg.text}</p>
+
     <div className={"btns"}>
     <button className="btnUpd" onClick={updateMsg} >Update</button>
     <button className="btnDel" onClick={deleteMsg} >Delete</button>
     </div>
+
 </div>
     </div>
   );

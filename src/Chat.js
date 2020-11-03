@@ -2,9 +2,7 @@ import React from "react";
 
 const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) => {
 
-    // const [name, setName] = useState("");
-    // const [message, setMessage] = useState("");
-  
+
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -12,6 +10,7 @@ const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) =
             "from": name,
             "text": message
         };
+
 
         if (!!update){
                 const requestOptions = {
@@ -35,6 +34,7 @@ const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) =
              
 
         } else {const requestOptions = {
+
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -44,6 +44,7 @@ const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) =
 
         fetch("https://gtabala-chat-server.glitch.me/messages/", requestOptions)
             .then(x => x.json())
+
             .then(x => {console.log(x)
              
             askAPI();
@@ -53,6 +54,7 @@ const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) =
           }
     }
    
+
     return (
         <div>
           <form onSubmit={submitForm}>
@@ -64,15 +66,15 @@ const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) =
             <label>
                 Message:
             </label>
-            {/* <textarea  name="message" rows="4" cols="50" value={message} placeholder="Enter your message here" onChange={e => setMessage(e.target.value)} /> */}
- 
-  
+
             <input type="text" name="message" value={message} placeholder="Enter your message here" onChange={e => setMessage(e.target.value)} />
             <br/><br/>
   
 
             <button onClick={submitForm}>
+
                {update ? "Update":"Post"}
+
             </button>
             </form>
         </div>
