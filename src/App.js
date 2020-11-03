@@ -9,10 +9,16 @@ function App() {
 const [messages, setMessages] = useState([]);
 const [kick, setKick] = useState(true);
 
+const [update, setUpdate] = useState(0);
+const [name, setName] = useState("");
+const [message, setMessage] = useState("");
+
+
 
 const askAPI = () => {
   setKick(!kick);
 };
+
 
 useEffect(() => {
     fetch("https://gtabala-chat-server.glitch.me/messages/")
@@ -30,9 +36,11 @@ useEffect(() => {
     <div className="App">
 
 {
-  messages.map((item, ind) => <Message key={ind} msg={item} askAPI={askAPI} />)
+
+  messages.map((item, ind) => <Message key={ind} msg={item} askAPI={askAPI} setUpdate={setUpdate} setName={setName} setMessage={setMessage} />)
 }
-      <Chat askAPI={askAPI} />
+      <Chat askAPI={askAPI} update={update} setUpdate={setUpdate} name={name} setName={setName} message={message} setMessage={setMessage} />
+
     </div>
   );
 }

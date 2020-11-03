@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 
-const Chat = ({askAPI}) => {
+const Chat = ({askAPI, update, setUpdate, name, setName, message, setMessage}) => {
 
-    let [name, setName] = useState("");
-    let [message, setMessage] = useState("");
+
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -12,7 +11,30 @@ const Chat = ({askAPI}) => {
             "text": message
         };
 
-        const requestOptions = {
+
+        if (!!update){
+                const requestOptions = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newMessage)
+        };
+
+        fetch(`https://gtabala-chat-server.glitch.me/messages/${update-1}`, requestOptions)
+            .then(x => x.json())
+            .then(x => {console.log(x);
+              
+              askAPI();
+           
+            setName("");
+            setMessage("");  
+            setUpdate(0);   
+            });
+             
+
+        } else {const requestOptions = {
+
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -22,13 +44,16 @@ const Chat = ({askAPI}) => {
 
         fetch("https://gtabala-chat-server.glitch.me/messages/", requestOptions)
             .then(x => x.json())
-            .then(x => console.log(x));
-            setTimeout(() => {
-              askAPI();
-            }, 1000);
+
+            .then(x => {console.log(x)
+             
+            askAPI();
             setName("");
             setMessage("");
+            });
+          }
     }
+   
 
     return (
         <div>
@@ -41,12 +66,15 @@ const Chat = ({askAPI}) => {
             <label>
                 Message:
             </label>
+
             <input type="text" name="message" value={message} placeholder="Enter your message here" onChange={e => setMessage(e.target.value)} />
             <br/><br/>
   
 
             <button onClick={submitForm}>
-                Post
+
+               {update ? "Update":"Post"}
+
             </button>
             </form>
         </div>
